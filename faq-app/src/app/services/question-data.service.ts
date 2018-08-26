@@ -34,4 +34,8 @@ export class QuestionDataService {
   getQuestions() {
     return this.questions;
   }
+
+  addQuestion(question) {
+    this.questions.unshift(question);
+  }
 }

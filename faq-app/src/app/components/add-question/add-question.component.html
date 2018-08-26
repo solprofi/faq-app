@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-header pointer-cursor" (click)="toggleHidden()">Add New Question</div>
+  <div class="card-block" [hidden]="isHidden">
+    <form class="container py-3" (submit)="addQuestion()">
+      <div class="form-group">
+        <label for="text">Your Question</label>
+        <input class="form-control" type="text" name="text" [(ngModel)]="text">
+      </div>
+      <div class="form-group">
+        <label for="text">Your Answer</label>
+        <input  class="form-control" type="text" name="answer" [(ngModel)]="answer">
+      </div>
+      <input type="submit" value="Submit" class="btn btn-primary">
+    </form>
+  </div>
+</div>
