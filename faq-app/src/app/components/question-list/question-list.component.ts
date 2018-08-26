@@ -1,3 +1,5 @@
+import { Question } from './../../models/question';
+import { QuestionDataService } from './../../services/question-data.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,29 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuestionListComponent implements OnInit {
 
-  questions: Object[];
-  constructor() {
-    this.questions = [
-      {
-        question: 'What is your name?',
-        answer: 'My name is Roman'
-      },
-      {
-        question: 'What is your pet`s name?',
-        answer: 'His name is Beem'
-      },
-      {
-        question: 'What is your age?',
-        answer: 'I\'m 20'
-      },
-      {
-        question: 'What is your name?',
-        answer: 'My name is Roman'
-      }
-    ];
-   }
+  questions: Question[];
+
+  constructor(public questionDataService: QuestionDataService) {
+  }
 
   ngOnInit() {
+    this.questions = this.questionDataService.getQuestions();
   }
 
 }
