@@ -7,35 +7,37 @@ import { Injectable } from '@angular/core';
 export class QuestionDataService {
   questions: Question[];
   constructor() {
-    this.questions = [
-      {
-        text: 'What is your name?',
-        answer: 'My name is Roman',
-        hide: true
-      },
-      {
-        text: 'What is your pet`s name?',
-        answer: 'His name is Beem',
-        hide: true
-      },
-      {
-        text: 'What is your age?',
-        answer: 'I\'m 20',
-        hide: true
-      },
-      {
-        text: 'What is your name?',
-        answer: 'My name is Roman',
-        hide: true
-      }
-    ];
   }
 
   getQuestions() {
+    if (localStorage.getItem('questions') === null) {
+      this.questions = [];
+    } else {
+      this.questions =  JSON.parse(localStorage.getItem('questions'));
+    }
     return this.questions;
   }
 
   addQuestion(question) {
     this.questions.unshift(question);
+
+    // add to local storage
+    let questions;
+    if (localStorage.getItem('questions') === null) {
+      questions = [];
+    } else {
+      questions = JSON.parse(localStorage.getItem('questions'));
+    }
+    questions.unshift(question);
+    localStorage.setItem('questions', JSON.stringify(questions));
+  }
+
+  removeQuestion(question) {
+    this.questions.forEach( (val, index, arr) => {
+      if (val === question) {
+        arr.splice(index, 1);
+        localStorage.setItem('questions', JSON.stringify(this.questions));
+      }
+    });
   }
 }

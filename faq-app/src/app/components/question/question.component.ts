@@ -1,3 +1,4 @@
+import { QuestionDataService } from './../../services/question-data.service';
 import { Question } from './../../models/question';
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -8,9 +9,14 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class QuestionComponent implements OnInit {
   @Input('question') question: Question;
-  constructor() { }
+  constructor(public questionDataService: QuestionDataService) {
+   }
 
   ngOnInit() {
+  }
+
+  removeQuestion(question) {
+    this.questionDataService.removeQuestion(question);
   }
 
 }
